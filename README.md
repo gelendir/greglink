@@ -9,17 +9,21 @@ Setup
 =====
 
 get the code:
+
     git clone git://github.com/gelendir/greglink
 
 install the python dependencies:
+
     virtualenv2 env
     source env/bin/activate
     pip install -r requirements.txt
 
 create config file:
+
     cp greglink/default_config.py localconfig.py
 
 edit config file:
+
     HOST = '0.0.0.0'
     PORT = 5000
     DEBUG = True
@@ -27,9 +31,11 @@ edit config file:
     TEST_ROOT = '/tmp/greglink_tests'
 
 setup database:
+
     CONFIG_FILE=/path/to/localconfig.py python setup.py
 
 run the webapp:
+
     CONFIG_FILE=/path/to/localconfig.py python app.py
 
 
