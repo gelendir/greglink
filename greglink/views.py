@@ -23,8 +23,7 @@ def test_success(id):
         return ("Test not found", 404)
 
     models.test_success(testcase)
-
-    return "test passed"
+    return redirect('/')
 
 @app.route('/<id>/blocked')
 def test_blocked(id):
@@ -33,8 +32,7 @@ def test_blocked(id):
         return ("Test not found", 404)
 
     models.test_blocked(testcase)
-
-    return "test blocked"
+    return redirect('/')
 
 @app.route('/<id>/failed')
 def test_failed(id):
@@ -43,5 +41,5 @@ def test_failed(id):
         return ("Test not found", 404)
 
     models.test_failed(testcase)
+    return redirect('/')
 
-    return "test failed"
