@@ -51,7 +51,7 @@ def test_blocked(testcase):
     db.session.commit()
     return execution
 
-def test_success(testcase):
+def test_failed(testcase):
     execution = execution_failed(testcase)
     db.session.add(execution)
     db.session.commit()
