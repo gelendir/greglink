@@ -14,6 +14,7 @@ get the code:
 
 install the python dependencies:
 
+    cd greglink
     virtualenv2 env
     source env/bin/activate
     pip install -r requirements.txt
@@ -42,7 +43,8 @@ run the webapp:
 Writing tests
 =============
 
-Are tests are written in markdown with the '.md' file extension. Tests are then placed in the test folder (in the example above, this would be /tmp/greglink_tests). Here's an example of a test file that we will name test1.md:
+All tests are written in markdown with the '.md' file extension. Tests are then placed in the test folder (in the example above, this would be /tmp/greglink_tests). 
+Here's an example of a test file that we will name test1.md:
 
 ~~~
 ---
