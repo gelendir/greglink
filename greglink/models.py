@@ -57,3 +57,13 @@ def test_failed(testcase):
     db.session.commit()
     return execution
 
+def test_status(test_id):
+    status = (
+                db.session.query(Status.name).
+                join(TestExecution).
+                filter(TestExecution.id == test_id).
+                first())
+
+    if status:
+        return status[0]
+    return None

@@ -5,5 +5,35 @@ Greglink
 {% endblock %}
 
 {% block content %}
-<p>Hello world</p>
+<table class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        {% for testcase in testcases %}
+
+            {% if testcase['status'] == "success" %}
+            <tr class="success">
+            {% elif testcase['status'] == "blocked" %}
+            <tr class="warning">
+            {% elif testcase['status'] == "failed" %}
+            <tr class="error">
+            {% else %}
+            <tr>
+            {% endif %}
+
+                <td>{{ testcase['id'] }}</td>
+                <td>{{ testcase['title'] }}</td>
+                <td>{{ testcase['status'] }}</td>
+                <td>
+                    <a href="{{ url_for('execute_test', id=testcase['id']) }}">Executer</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

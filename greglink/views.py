@@ -6,7 +6,13 @@ from flask import render_template, request, redirect, url_for
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    testcases = lib.all_tests()
+    for testcase in testcases:
+        status = models.test_status(testcase['id'])
+        if status:
+            testcase['status'] = status
+
+    return render_template('index.html', testcases=testcases)
 
 @app.route('/<id>/execute')
 def execute_test(id):

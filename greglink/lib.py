@@ -59,3 +59,15 @@ def find_test(id):
 
     return testcase
 
+
+def all_tests():
+    files = os.listdir(app.config['TEST_ROOT'])
+    tests = []
+
+    for filename in files:
+        filepath = os.path.join(app.config['TEST_ROOT'], filename)
+        with open(filepath) as testfile:
+            testcase = parse_testfile(testfile)
+            tests.append(testcase)
+
+    return tests
