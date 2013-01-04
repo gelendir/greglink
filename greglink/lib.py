@@ -68,6 +68,7 @@ def all_tests():
         filepath = os.path.join(app.config['TEST_ROOT'], filename)
         with open(filepath) as testfile:
             testcase = parse_testfile(testfile)
+            testcase['filename'] = filename.rpartition(".")[0]
             tests.append(testcase)
 
     return tests

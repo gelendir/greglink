@@ -29,7 +29,7 @@ Greglink
                 <td>{{ testcase['title'] }}</td>
                 <td>{{ testcase['status'] }}</td>
                 <td>
-                    <a href="{{ url_for('execute_test', id=testcase['id']) }}">Executer</a>
+                    <a href="{{ url_for('execute_test', id=testcase['filename']) }}">Executer</a>
                 </td>
 
             </tr>
