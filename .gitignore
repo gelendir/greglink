@@ -1,5 +1,5 @@
 *.pyc
 /env
 /localconfig.py
-/tests
-/test.db
+/testrepo
+/database.db
