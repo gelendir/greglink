@@ -1,30 +1,7 @@
 from greglink import db
 
-
-class Status(db.Model):
-
-    __tablename__ = 'statuses'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-
-    def __repr__(self):
-        return "<Status id:%s name:%s>" % (self.id, self.name)
-
-class TestExecution(db.Model):
-
-    __tablename__ = 'test_executions'
-
-    id = db.Column(db.String, primary_key=True)
-    status_id = db.Column(db.Integer, db.ForeignKey('statuses.id'))
-    status = db.relationship('Status')
-
-    def __repr__(self):
-        return "<TestExecution id:%s status_id:%s status:%s>" % (
-                self.id,
-                self.status_id,
-                repr(self.status))
-
+from .status import Status
+from .test_execution import TestExecution
 
 def execution_with_status(testcase, status):
     status = db.session.query(Status).filter(Status.name == status).first()
@@ -67,3 +44,4 @@ def test_status(test_id):
     if status:
         return status[0]
     return None
+
