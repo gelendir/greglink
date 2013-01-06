@@ -3,35 +3,25 @@ from greglink import db
 from .status import Status
 from .test_execution import TestExecution
 
-def execution_with_status(testcase, status):
-    status = db.session.query(Status).filter(Status.name == status).first()
-    return TestExecution(id=testcase.id, status=status)
-
-def execution_success(testcase):
-    return execution_with_status(testcase, "success")
-
-def execution_blocked(testcase):
-    return execution_with_status(testcase, "blocked")
-
-def execution_failed(testcase):
-    return execution_with_status(testcase, "failed")
-
-def test_success(testcase):
-    execution = execution_success(testcase)
+def save_execution(execution, test_id):
+    execution.test_id = test_id
     db.session.add(execution)
     db.session.commit()
     return execution
 
-def test_blocked(testcase):
-    execution = execution_blocked(testcase)
-    db.session.add(execution)
-    db.session.commit()
-    return execution
+def save_success(testcase):
+    test_id = testcase.id
+    execution = TestExecution.with_success()
+    return save_execution(execution, test_id)
 
-def test_failed(testcase):
-    execution = execution_failed(testcase)
-    db.session.add(execution)
-    db.session.commit()
-    return execution
+def save_blocked(testcase):
+    test_id = testcase.id
+    execution = TestExecution.with_blocked()
+    return save_execution(execution, test_id)
+
+def save_failed(testcase):
+    test_id = testcase.id
+    execution = TestExecution.with_failed()
+    return save_execution(execution, test_id)
 
 
