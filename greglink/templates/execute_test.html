@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ testcase['title'] }}
+{{ testcase.title }}
 {% endblock %}
 
 {% block content %}
 
-<h1>{{ testcase['title'] }}</h1>
+<h1>{{ testcase.title }}</h1>
 
-{{ testcase['content']|safe }}
+{{ testcase.to_html()|safe }}
 
 <div class="form-actions">
-    <a href="{{ url_for('test_success', id=testcase['id']) }}"
+    <a href="{{ url_for('test_success', id=testcase.urlid) }}"
         class="btn btn-success">Passed</a>
-    <a href="{{ url_for('test_blocked', id=testcase['id']) }}"
+    <a href="{{ url_for('test_blocked', id=testcase.urlid) }}"
         class="btn btn-warning">Blocked</a>
-    <a href="{{ url_for('test_failed', id=testcase['id']) }}"
+    <a href="{{ url_for('test_failed', id=testcase.urlid) }}"
         class="btn btn-danger">Failed</a>
 </div>
 

@@ -5,7 +5,7 @@ from .test_execution import TestExecution
 
 def execution_with_status(testcase, status):
     status = db.session.query(Status).filter(Status.name == status).first()
-    return TestExecution(id=testcase['id'], status=status)
+    return TestExecution(id=testcase.id, status=status)
 
 def execution_success(testcase):
     return execution_with_status(testcase, "success")
@@ -34,14 +34,4 @@ def test_failed(testcase):
     db.session.commit()
     return execution
 
-def test_status(test_id):
-    status = (
-                db.session.query(Status.name).
-                join(TestExecution).
-                filter(TestExecution.id == test_id).
-                first())
-
-    if status:
-        return status[0]
-    return None
 

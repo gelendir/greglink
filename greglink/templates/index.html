@@ -15,21 +15,21 @@ Greglink
     <tbody>
         {% for testcase in testcases %}
 
-            {% if testcase['status'] == "success" %}
+            {% if testcase.status_name() == "success" %}
             <tr class="success">
-            {% elif testcase['status'] == "blocked" %}
+            {% elif testcase.status_name() == "blocked" %}
             <tr class="warning">
-            {% elif testcase['status'] == "failed" %}
+            {% elif testcase.status_name() == "failed" %}
             <tr class="error">
             {% else %}
             <tr>
             {% endif %}
 
-                <td>{{ testcase['id'] }}</td>
-                <td>{{ testcase['title'] }}</td>
-                <td>{{ testcase['status'] }}</td>
+                <td>{{ testcase.id }}</td>
+                <td>{{ testcase.title }}</td>
+                <td>{{ testcase.status_name() }}</td>
                 <td>
-                    <a href="{{ url_for('execute_test', id=testcase['filename']) }}">Executer</a>
+                    <a href="{{ url_for('execute_test', id=testcase.urlid) }}">Executer</a>
                 </td>
 
             </tr>
