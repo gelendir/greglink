@@ -1,5 +1,7 @@
 from greglink.models.testfile import load_testfile, convert_markup
-from greglink.models.status import status_name
+from greglink import db
+from greglink.models.status import Status
+from greglink.models.test_execution import TestExecution
 
 
 class NoHeaderInTestfile(Exception):
@@ -33,7 +35,16 @@ class TestCase(object):
         return convert_markup(self.markup)
 
     def status_name(self):
-        return status_name(self.id)
+        status = (
+                    db.session.query(Status.name)
+                    .join(TestExecution)
+                    .filter(TestExecution.test_id == self.id)
+                    .order_by(TestExecution.created_at.desc())
+                    .first())
+
+        if status:
+            return status[0]
+        return None
 
 
 def load_file(filepath):
