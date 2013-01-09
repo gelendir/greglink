@@ -11,11 +11,11 @@
 {{ testcase.to_html()|safe }}
 
 <div class="form-actions">
-    <a href="{{ url_for('test_success', id=testcase.urlid) }}"
+    <a href="{{ url_for('test_success', path=testcase.path) }}"
         class="btn btn-success">Passed</a>
-    <a href="{{ url_for('test_blocked', id=testcase.urlid) }}"
+    <a href="{{ url_for('test_blocked', path=testcase.path) }}"
         class="btn btn-warning">Blocked</a>
-    <a href="{{ url_for('test_failed', id=testcase.urlid) }}"
+    <a href="{{ url_for('test_failed', path=testcase.path) }}"
         class="btn btn-danger">Failed</a>
 </div>
 

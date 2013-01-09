@@ -29,9 +29,22 @@ Greglink
                 <td>{{ testcase.title }}</td>
                 <td>{{ testcase.status_name() }}</td>
                 <td>
-                    <a href="{{ url_for('execute_test', id=testcase.urlid) }}">Executer</a>
+                    <a href="{{ url_for('execute_test', path=testcase.path) }}">Executer</a>
                 </td>
 
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <th>Dossiers</th>
+    </thead>
+    <tbody>
+        {% for folder in folders %}
+            <tr>
+                <td><a href="{{ url_for('list_tests', path=folder) }}">{{ folder }}</a></td>
             </tr>
         {% endfor %}
     </tbody>
