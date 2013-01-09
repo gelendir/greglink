@@ -1,8 +1,5 @@
 import markdown
-import os
 import yaml
-
-from greglink import app
 
 ENCODING = 'utf8'
 DELIMITER = "---"
