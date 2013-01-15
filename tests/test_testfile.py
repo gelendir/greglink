@@ -2,8 +2,7 @@
 import textwrap
 import unittest
 
-from greglink.models import testfile
-from mock import patch
+from greglink.lib import testfile
 from StringIO import StringIO
 
 

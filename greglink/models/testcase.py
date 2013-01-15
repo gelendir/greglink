@@ -1,4 +1,4 @@
-from greglink.models.testfile import convert_markup
+from greglink.lib import convert_markup
 from greglink import db
 from greglink.models.status import Status
 from greglink.models.test_execution import TestExecution

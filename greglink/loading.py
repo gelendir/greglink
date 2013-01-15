@@ -2,7 +2,7 @@ import os
 
 from greglink import app
 from greglink.models.testcase import TestCase
-from greglink.models.testfile import load_testfile
+from greglink.lib.testfile import load_testfile
 
 EXTENSION = "md"
 
@@ -39,11 +39,14 @@ def load_test(path, filepath):
 
     return TestCase(path, header, markup)
 
+def filter_testfiles(files):
+    return (f for f in files if f.endswith(EXTENSION))
+
 def all_testfiles(dirpath):
     if not os.path.exists(dirpath):
         return []
 
-    return (f for f in os.listdir(dirpath) if f.endswith(EXTENSION))
+    return filter_testfiles(os.listdir(dirpath))
 
 def all_tests(path='/'):
     dirpath = path_to_filepath(path)

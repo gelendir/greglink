@@ -1,8 +1,9 @@
 import os
 
 from greglink import app
-from greglink.models.testcase import TestCase
-from greglink import models, testload
+from greglink.models import TestCase
+from greglink.loading import all_tests, find_test
+from greglink import models
 from flask import render_template, request, redirect, url_for
 
 
@@ -20,13 +21,13 @@ def index():
 
 @app.route('/<path:path>')
 def list_tests(path):
-    testcases = testload.all_tests(path)
+    testcases = all_tests(path)
     folders = all_folders(path)
     return render_template('index.html', testcases=testcases, folders=folders)
 
 @app.route('/<path:path>/execute')
 def execute_test(path):
-    testcase = testload.find_test(path)
+    testcase = find_test(path)
     if not testcase:
         return ("Test not found", 404)
 
@@ -34,7 +35,7 @@ def execute_test(path):
 
 @app.route('/<path:path>/passed')
 def test_success(path):
-    testcase = testload.find_test(path)
+    testcase = find_test(path)
     if not testcase:
         return ("Test not found", 404)
 
@@ -43,7 +44,7 @@ def test_success(path):
 
 @app.route('/<path:path>/blocked')
 def test_blocked(path):
-    testcase = testload.find_test(path)
+    testcase = find_test(path)
     if not testcase:
         return ("Test not found", 404)
 
@@ -52,7 +53,7 @@ def test_blocked(path):
 
 @app.route('/<path:path>/failed')
 def test_failed(path):
-    testcase = testload.find_test(path)
+    testcase = find_test(path)
     if not testcase:
         return ("Test not found", 404)
 

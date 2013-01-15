@@ -2,6 +2,7 @@ from greglink import db
 
 from .status import Status
 from .test_execution import TestExecution
+from .testcase import TestCase
 
 def save_execution(execution, test_id):
     execution.test_id = test_id

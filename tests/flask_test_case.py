@@ -1,5 +1,6 @@
 import unittest
-from greglink import app, database
+from greglink import app
+from greglink.lib import database
 
 
 class FlaskTestCase(unittest.TestCase):
