@@ -1,7 +1,9 @@
 import os
+import json
 
 from greglink import app
 from greglink.models import TestCase
+from greglink.lib.jstree import generate_tree
 from greglink.loading import all_tests, find_test
 from greglink import models
 from flask import render_template, request, redirect, url_for
@@ -60,7 +62,8 @@ def test_failed(path):
     models.save_failed(testcase)
     return redirect('/')
 
-@app.route('/<path:path>/bla')
-def test_bla(path):
-    return path
+@app.route('/jstree')
+def jstree():
+    tree = generate_tree(app.config['TEST_ROOT'])
+    return (json.dumps(tree), 200)
 
