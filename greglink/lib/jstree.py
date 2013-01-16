@@ -37,9 +37,8 @@ def generate_tree(rootpath):
     for path, dirs, files in os.walk(rootpath):
         node = create_dirnode(rootpath, path, files)
 
-        if path == rootpath:
-            tree[path] = node
-        else:
+        tree[path] = node
+        if path != rootpath:
             parent = os.path.dirname(path)
             tree[parent]['children'].append(node)
 

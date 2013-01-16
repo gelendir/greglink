@@ -163,5 +163,37 @@ class TestGenerateTree(unittest.TestCase):
 
         self.assertEquals(result, expected)
 
+    def test_two_nested_dirs_one_file(self):
+        mkdir(os.path.join(self.root, 'foo'))
+        mkdir(os.path.join(self.root, 'foo', 'bar'))
+        mkfile(os.path.join(self.root, 'foo', 'bar', 'spam'))
+
+        expected = {
+            'data': ROOT_NAME,
+            'attr': {'href': '/'},
+            'children': [
+                {
+                    'data': 'foo',
+                    'attr': {'href': '/foo'},
+                    'children': [
+                        {
+                            'data': 'bar',
+                            'attr': {'href': '/foo/bar'},
+                            'children': [
+                                {
+                                    'data': 'spam',
+                                    'attr': {'href': '/foo/bar/spam'},
+                                }
+                            ],
+                        },
+                    ]
+                }
+            ],
+        }
+
+        result = jstree.generate_tree(self.root)
+
+        self.assertEquals(result, expected)
+
 if __name__ == "__main__":
     unittest.main()
