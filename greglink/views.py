@@ -21,6 +21,12 @@ def all_folders(path='/'):
 def index():
     return list_tests('/')
 
+
+@app.route('/favicon.ico')
+def favicon():
+    return ('', 404)
+
+
 @app.route('/<path:path>')
 def list_tests(path):
     testcases = all_tests(path)
