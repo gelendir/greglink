@@ -33,6 +33,7 @@ def list_tests(path):
     folders = all_folders(path)
     return render_template('index.html', testcases=testcases, folders=folders)
 
+
 @app.route('/<path:path>/execute')
 def execute_test(path):
     testcase = find_test(path)
@@ -40,6 +41,7 @@ def execute_test(path):
         return ("Test not found", 404)
 
     return render_template('execute_test.html', testcase=testcase)
+
 
 @app.route('/<path:path>/passed')
 def test_success(path):
@@ -50,6 +52,7 @@ def test_success(path):
     models.save_success(testcase)
     return redirect('/')
 
+
 @app.route('/<path:path>/blocked')
 def test_blocked(path):
     testcase = find_test(path)
@@ -58,6 +61,7 @@ def test_blocked(path):
 
     models.save_blocked(testcase)
     return redirect('/')
+
 
 @app.route('/<path:path>/failed')
 def test_failed(path):
