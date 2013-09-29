@@ -8,6 +8,7 @@
     {% endblock %}
     </title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/js/dynatree/skin/ui.dynatree.css" rel="stylesheet">
 </head>
 
 <body>
@@ -50,16 +51,29 @@
 
     </div>
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/static/js/dynatree/jquery/jquery.min.js"></script>
+    <script src="/static/js/dynatree/jquery/jquery.cookie.js"></script>
+    <script src="/static/js/dynatree/jquery/jquery-ui.custom.min.js"></script>
+    <script src="/static/js/dynatree/jquery.dynatree.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/jstree-v.pre1.0/jquery.jstree.js"></script>
     <script type='text/javascript'>
     $(function() {
-        $("#tree").jstree({
-            plugins: ["themes", "json_data", "ui"],
-            json_data: {
-                ajax: {
-                    url: "{{ url_for('jstree') }}"
+        var currentPath = "{{ g.current_path }}";
+
+        $("#tree").dynatree({
+            persist: true,
+            cookie: {
+                path: '/'
+            },
+            children: {{ navigation_tree()|safe }},
+            onPostInit: function(isReloading, isError) {
+                this.activateKey(currentPath);
+            },
+            onActivate: function(node) {
+                if (!node.tree.isReloading()) {
+                    if (node.data.href) {
+                        window.open(node.data.href, '_self');
+                    }
                 }
             }
         });

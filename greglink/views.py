@@ -3,10 +3,10 @@ import json
 
 from greglink import app
 from greglink.models import TestCase
-from greglink.lib.jstree import generate_tree
+from greglink.lib.navigation import generate_tree
 from greglink.loading import all_tests, find_test
 from greglink import models
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, g
 
 
 def all_folders(path='/'):
@@ -62,8 +62,21 @@ def test_failed(path):
     models.save_failed(testcase)
     return redirect('/')
 
-@app.route('/jstree')
-def jstree():
-    tree = generate_tree(app.config['TEST_ROOT'])
-    return (json.dumps(tree), 200)
 
+def navigation_tree():
+    current_path = getattr(g, 'current_path', None)
+    tree = generate_tree(app.config['TEST_ROOT'], current_path)
+    return json.dumps(tree)
+
+
+@app.context_processor
+def context_processor():
+    return {
+        'navigation_tree': navigation_tree
+    }
+
+
+@app.before_request
+def before_request():
+    if 'path' in request.view_args:
+        g.current_path = "/%s" % request.view_args['path']
