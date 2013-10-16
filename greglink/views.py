@@ -75,7 +75,7 @@ def test_failed(path):
 
 def navigation_tree():
     current_path = getattr(g, 'current_path', None)
-    tree = generate_tree(app.config['TEST_ROOT'], current_path)
+    tree = generate_tree(app.config['TEST_ROOT'])
     return json.dumps(tree)
 
 
