@@ -21,7 +21,7 @@ install the python dependencies:
 
 create config file:
 
-    cp greglink/default_config.py localconfig.py
+    cp greglink/config/default_config.py localconfig.py
 
 edit config file:
 
